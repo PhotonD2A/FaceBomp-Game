@@ -1,0 +1,186 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #0066ff, #00ccff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* Title Styles */
+h1 {
+    color: white;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+/* Game Controls */
+.game-controls {
+    margin-bottom: 30px;
+}
+
+#startButton {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-bottom: 15px;
+}
+
+#startButton:hover {
+    transform: scale(1.05);
+}
+
+.game-info {
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Game Board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hole {
+    background: #003366;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.1s;
+    box-shadow: inset 0 8px 20px rgba(0, 0, 0, 0.6),
+                inset 0 -4px 6px rgba(255, 255, 255, 0.1);
+}
+
+.face {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.hole.up .face {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.hole.clicked .face {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.7;
+    transition: transform 0.1s, opacity 0.1s;
+}
+
+/* End Message */
+.end-message {
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: pre-line;
+}
+
+.end-message.visible {
+    opacity: 1;
+}
+
+/* Animation for popping effect */
+@keyframes pop {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.hole.up .face {
+    animation: pop 0.3s ease-out;
+}
+
+/* Player Input Styles */
+.player-input {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Style for both inputs */
+#playerName, #gameTime {
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #003366;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+#playerName {
+    width: 200px;
+}
+
+#gameTime {
+    width: 160px;
+}
+
+#playerName:focus, #gameTime:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+#playerName:disabled, #gameTime:disabled {
+    background: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+}
+
+/* Remove up/down arrows from number input */
+#gameTime::-webkit-inner-spin-button, 
+#gameTime::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#gameTime {
+    -moz-appearance: textfield;
+}
+
+/* Enhance depth effect when face appears */
+.hole.up {
+    box-shadow: inset 0 8px 20px rgba(0, 0, 0, 0.4),
+                inset 0 -4px 6px rgba(255, 255, 255, 0.1),
+                0 0 10px rgba(0, 0, 0, 0.2);
+}
+  
